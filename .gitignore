@@ -1,0 +1,19 @@
+# Common Files
+.DS_Store
+*.jar
+
+# Eclipse Files and directories
+.metadata/
+.settings/
+.classpath
+.project
+bin/
+build/
+target/
+
+# IntelliJ
+.idea
+*.iml
+
+# gradle
+.gradle
