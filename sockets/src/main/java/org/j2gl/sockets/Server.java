@@ -21,7 +21,7 @@ public class Server {
                 new ServerSocketExample(listener.accept(), ++client).start();
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("Error with server: ", ex);
         } finally {
             listener.close();
         }
