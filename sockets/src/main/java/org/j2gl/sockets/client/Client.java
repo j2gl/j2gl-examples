@@ -39,7 +39,7 @@ public class Client {
             line = in.readLine();
             socketOut.println(line);
             response = receiveData(socketIn);
-            if (response == null || response.equalsIgnoreCase("Bye")) {
+            if (response == null) {
                 keepRunning = false;
             }
         }

@@ -1,11 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-
-jar {
-    baseName = 'sockets'
-    version = '0.0.1'
-}
+apply plugin: 'application'
 
 repositories {
     mavenCentral()
@@ -14,6 +10,7 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+mainClassName = "org.j2gl.sockets.server.Server"
 
 dependencies {
     compile("org.slf4j:slf4j-api:1.7.18")
@@ -21,6 +18,20 @@ dependencies {
     testCompile("junit:junit")
 }
 
+jar {
+    baseName = 'sockets'
+    version = '0.0.1'
+    manifest {
+        attributes (
+                "Main-Class" : mainClassName,
+                "Manifest-Version": "1.0",
+                "Implementation-Title": "Socket Example",
+                "Implementation-Version": version,
+                "Class-Path": configurations.compile.collect { it.getName() }.join(" ")
+        )
+    }
+}
+
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
+    gradleVersion = '2.4'
 }
