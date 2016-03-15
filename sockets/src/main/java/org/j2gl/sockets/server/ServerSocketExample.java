@@ -1,4 +1,4 @@
-package org.j2gl.sockets;
+package org.j2gl.sockets.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,10 +32,11 @@ public class ServerSocketExample extends Thread {
             while (true) {
                 String line = in.readLine();
                 if (line == null || line.equalsIgnoreCase("quit")) {
+                    out.println("Bye");
                     break;
                 }
                 log.info("Client # {} sent: {}", connectionNumber, line);
-                out.println("{ Status: \"OK\" }");
+                out.println("You just send me: " + line);
             }
         } catch (IOException e) {
             log.error("Error on connection # {} ", connectionNumber, e);

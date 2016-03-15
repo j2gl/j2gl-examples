@@ -1,4 +1,4 @@
-package org.j2gl.sockets;
+package org.j2gl.sockets.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import java.net.ServerSocket;
 public class Server {
 
     private static final Logger logger = LoggerFactory.getLogger(Server.class);
-    private static final int PORT = 7081;
+    public static final int PORT = 7081;
 
     public static void main(String[] args) throws Exception {
 
