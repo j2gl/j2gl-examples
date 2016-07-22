@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = "org.j2gl.base64.Base64Decoder"
+
+dependencies {
+    compile("org.slf4j:slf4j-api:1.7.18")
+    compile("org.slf4j:slf4j-simple:1.7.18")
+    compile("commons-codec:commons-codec:1.10")
+    testCompile("junit:junit")
+}
+
+jar {
+    baseName = 'base64'
+    version = '0.0.1'
+    manifest {
+        attributes (
+                "Main-Class" : mainClassName,
+                "Manifest-Version": "1.0",
+                "Implementation-Title": "Base 64 Utils",
+                "Implementation-Version": version,
+                "Class-Path": configurations.compile.collect { it.getName() }.join(" ")
+        )
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
+}
