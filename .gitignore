@@ -1,3 +1,6 @@
+# Common Directories
+temp/
+
 # Common Files
 .DS_Store
 *.jar
