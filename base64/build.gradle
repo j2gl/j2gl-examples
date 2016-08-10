@@ -28,7 +28,7 @@ jar {
                 "Manifest-Version": "1.0",
                 "Implementation-Title": "Base 64 Utils",
                 "Implementation-Version": version,
-                "Class-Path": configurations.compile.collect { it.getName() }.join(" ")
+                "Class-Path": configurations.compile.collect { "lib/" + it.getName() }.join(" ")
         )
     }
 }
