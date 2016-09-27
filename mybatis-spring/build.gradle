@@ -1,0 +1,61 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+buildscript {
+    ext {
+        springBootVersion = '1.4.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+jar {
+    baseName = 'j2gl-mybatis-spring'
+    version = '1.0.0-SNAPSHOT'
+}
+
+
+ext {
+    springFrameworkVersion = "4.3.3.RELEASE"
+    springBootVersion = "1.4.1.RELEASE"
+    myBatisVersion = "1.1.1"
+    mysqlConnectorVersion = "5.1.39"
+    hikariVersion = "2.5.1"
+    swaggerVersion = "2.5.0"
+    junitVersion = "4.12"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1'
+    compile "org.springframework:spring-tx:$springFrameworkVersion"
+
+    compile "mysql:mysql-connector-java:$mysqlConnectorVersion"
+    compile "com.zaxxer:HikariCP:$hikariVersion"
+
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.springframework:spring-test:$springFrameworkVersion"
+}
+
+test {
+    filter {
+        // Include all integration tests
+        includeTestsMatching "*IT"
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.11'
+}
