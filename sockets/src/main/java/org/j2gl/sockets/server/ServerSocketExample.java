@@ -9,28 +9,26 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ServerSocketExample extends Thread {
+class ServerSocketExample extends Thread {
 
     private static final Logger log = LoggerFactory.getLogger(ServerSocketExample.class);
 
-    private Socket socket;
-    private int connectionNumber;
+    private final Socket socket;
+    private final int connectionNumber;
 
-    public ServerSocketExample(Socket socket, int connectionNumber) {
+    ServerSocketExample(final Socket socket, final int connectionNumber) {
         this.socket = socket;
         this.connectionNumber = connectionNumber;
         log.info("New connection # " + connectionNumber + " at " + socket);
     }
 
     public void run() {
-        try {
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println("Send \"quit\" to shutdown.");
+        try (final BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             final PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
 
+            out.println("Send \"quit\" to shutdown.");
             while (true) {
-                String line = in.readLine();
+                final String line = in.readLine();
                 if (line == null || line.equalsIgnoreCase("quit")) {
                     out.println("Bye");
                     break;
@@ -38,12 +36,13 @@ public class ServerSocketExample extends Thread {
                 log.info("Client # {} sent: {}", connectionNumber, line);
                 out.println("You just send me: " + line);
             }
-        } catch (IOException e) {
+
+        } catch (final IOException e) {
             log.error("Error on connection # {} ", connectionNumber, e);
         } finally {
             try {
                 socket.close();
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 log.debug("Error closing connection # {}", connectionNumber, e);
             }
             log.info("Connection # {} was closed", connectionNumber);
