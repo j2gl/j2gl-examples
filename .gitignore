@@ -16,7 +16,19 @@ target/
 
 # IntelliJ
 .idea
+*.iws
 *.iml
+*.ipr
+
+# Visual Studio
+.vscode
 
 # gradle
 .gradle
+
+# Maven
+target/
+
+# Java
+*.class
+
